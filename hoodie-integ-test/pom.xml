@@ -11,17 +11,35 @@
   <artifactId>hoodie-integ-test</artifactId>
 
   <dependencies>
+    <!-- Glassfish -->
+    <!-- needs to be at top -->
+    <dependency>
+      <groupId>org.glassfish.jersey.core</groupId>
+      <artifactId>jersey-server</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.glassfish.jersey.connectors</groupId>
+      <artifactId>jersey-apache-connector</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.glassfish.jersey.containers</groupId>
+      <artifactId>jersey-container-servlet-core</artifactId>
+    </dependency>
+
+    <!-- Docker-Java - Test-->
+    <!-- needs to be at top to force javax.ws version -->
+    <dependency>
+      <groupId>com.github.docker-java</groupId>
+      <artifactId>docker-java</artifactId>
+      <version>3.1.2</version>
+      <scope>test</scope>
+    </dependency>
+
     <!-- Hoodie -->
     <dependency>
       <groupId>com.uber.hoodie</groupId>
       <artifactId>hoodie-spark</artifactId>
       <version>${project.version}</version>
-      <exclusions>
-        <exclusion>
-          <groupId>org.glassfish.**</groupId>
-          <artifactId>*</artifactId>
-        </exclusion>
-      </exclusions>
     </dependency>
 
     <!-- Logging -->
@@ -34,18 +52,13 @@
       <artifactId>slf4j-log4j12</artifactId>
     </dependency>
 
-    <!-- Glassfish -->
+    <!-- Hoodie - Import -->
     <dependency>
-      <groupId>org.glassfish.jersey.core</groupId>
-      <artifactId>jersey-server</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.glassfish.jersey.connectors</groupId>
-      <artifactId>jersey-apache-connector</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.glassfish.jersey.containers</groupId>
-      <artifactId>jersey-container-servlet-core</artifactId>
+      <groupId>com.uber.hoodie</groupId>
+      <artifactId>hoodie-hadoop-sparkworker-docker</artifactId>
+      <version>${project.version}</version>
+      <type>pom</type>
+      <scope>import</scope>
     </dependency>
 
     <!-- Hoodie - Test -->
@@ -64,19 +77,6 @@
       <classifier>tests</classifier>
       <type>test-jar</type>
       <scope>test</scope>
-      <exclusions>
-        <exclusion>
-          <groupId>org.glassfish.**</groupId>
-          <artifactId>*</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>com.uber.hoodie</groupId>
-      <artifactId>hoodie-hadoop-sparkworker-docker</artifactId>
-      <version>${project.version}</version>
-      <type>pom</type>
-      <scope>import</scope>
     </dependency>
 
     <!-- Fasterxml - Test-->
@@ -95,19 +95,6 @@
       <artifactId>jackson-datatype-guava</artifactId>
       <version>${fasterxml.version}</version>
       <scope>test</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>com.github.docker-java</groupId>
-      <artifactId>docker-java</artifactId>
-      <version>3.1.2</version>
-      <scope>test</scope>
-      <exclusions>
-        <exclusion>
-          <groupId>org.glassfish.**</groupId>
-          <artifactId>*</artifactId>
-        </exclusion>
-      </exclusions>
     </dependency>
 
     <dependency>

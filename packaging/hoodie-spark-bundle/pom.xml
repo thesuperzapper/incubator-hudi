@@ -152,6 +152,10 @@
                   <shadedPattern>com.uber.hoodie.org.apache.hadoop_hive.service.</shadedPattern>
                 </relocation>
                 <relocation>
+                  <pattern>org.apache.hadoop.hive.serde2.</pattern>
+                  <shadedPattern>com.uber.hoodie.org.apache.hadoop_hive.serde2.</shadedPattern>
+                </relocation>
+                <relocation>
                   <pattern>com.esotericsoftware.kryo.</pattern>
                   <shadedPattern>com.uber.hoodie.com.esotericsoftware.kryo.</shadedPattern>
                 </relocation>
@@ -173,9 +177,8 @@
                   <exclude>org.apache.derby:derby</exclude>
                   <exclude>org.apache.hadoop:*</exclude>
                   <exclude>org.apache.hbase:*</exclude>
-                  <!-- Just include hive-common, hive-service, hive-metastore and hive-jdbc -->
+                  <!-- Just include hive-common, hive-serde, hive-service, hive-metastore and hive-jdbc -->
                   <exclude>org.apache.hive:hive-exec</exclude>
-                  <exclude>org.apache.hive:hive-serde</exclude>
                   <exclude>org.apache.hive:hive-shims</exclude>
                   <exclude>org.apache.spark:*</exclude>
                 </excludes>
@@ -319,6 +322,12 @@
     <dependency>
       <groupId>${hive.groupid}</groupId>
       <artifactId>hive-jdbc</artifactId>
+      <version>${hive.version}</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>${hive.groupid}</groupId>
+      <artifactId>hive-serde</artifactId>
       <version>${hive.version}</version>
       <scope>compile</scope>
     </dependency>
